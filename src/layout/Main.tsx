@@ -52,6 +52,26 @@ const generateRoutesAuthenticated = ({
     selected: pathname === "/user",
   },
   {
+    item: "Crear Pedido",
+    onClick: () => {
+      if (pathname !== "/pedido") {
+        navigate("pedido");
+      }
+      handleClose();
+    },
+    selected: pathname === "/pedido",
+  },
+  {
+    item: "Buscar Pedido",
+    onClick: () => {
+      if (pathname !== "/buscador") {
+        navigate("buscador");
+      }
+      handleClose();
+    },
+    selected: pathname === "/buscador",
+  },
+  {
     item: "Logout con Popup",
     onClick: () => {
       instanceMsal.logoutPopup({ postLogoutRedirectUri: "/", mainWindowRedirectUri: "/" });

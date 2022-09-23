@@ -11,6 +11,8 @@ const User = () => {
 
   const [show, { toggle }] = useToggle();
 
+  console.log("Datos", accounts);
+
   const account = accounts[0];
 
   if (!account) {
