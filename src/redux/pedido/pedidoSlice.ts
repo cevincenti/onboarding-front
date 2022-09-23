@@ -71,10 +71,50 @@ export const pedidoSlice = createSlice({
         cuando: "",
       };
     },
+    getPedidoRequest: (state) => {
+      state.isLoading = true;
+      state.data = {
+        pedidoId: "",
+        id: "",
+        numeroDePedido: 0,
+        cicloDePedido: "",
+        codigoDeContratoInterno: 0,
+        estadoDelPedido: "",
+        cuentaCorriente: 0,
+        cuando: "",
+      };
+      state.error = "Sin Errores";
+    },
+    getPedidoSuccess: (state, action: PayloadAction<PedidoType>) => {
+      state.isLoading = false;
+      state.data = action.payload;
+      state.error = "Sin Errores";
+    },
+    getPedidoFailure: (state, action: PayloadAction<string>) => {
+      state.isLoading = false;
+      state.error = action.payload;
+      state.data = {
+        pedidoId: "",
+        id: "",
+        numeroDePedido: 0,
+        cicloDePedido: "",
+        codigoDeContratoInterno: 0,
+        estadoDelPedido: "",
+        cuentaCorriente: 0,
+        cuando: "",
+      };
+    },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { postPedidoRequest, postPedidoSuccess, postPedidoFailure } = pedidoSlice.actions;
+export const {
+  postPedidoRequest,
+  postPedidoSuccess,
+  postPedidoFailure,
+  getPedidoRequest,
+  getPedidoSuccess,
+  getPedidoFailure,
+} = pedidoSlice.actions;
 
 export default pedidoSlice.reducer;

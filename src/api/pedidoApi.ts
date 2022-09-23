@@ -1,13 +1,31 @@
 import { FormData } from "components/PedidoForm";
-import { postPedidoRequest, postPedidoSuccess, postPedidoFailure } from "redux/pedido/pedidoSlice";
+import {
+  postPedidoRequest,
+  postPedidoSuccess,
+  postPedidoFailure,
+  getPedidoRequest,
+  getPedidoSuccess,
+  getPedidoFailure,
+} from "redux/pedido/pedidoSlice";
 import { instance, configuration } from "./ServiceBase";
 
-//Obtener Pedido
+//Thunk Obtener Pedido
 const getPedido = (id: string) => {
-  return instance
-    .get(`${configuration.baseURL}${id}`)
-    .then((res) => res.data)
-    .catch((err) => console.error(err));
+  return async (dispatch: any) => {
+    dispatch(getPedidoRequest());
+    await instance
+      .get(`${configuration.baseURL}${id}`)
+      .then((response) => {
+        if (response.status == 200) {
+          dispatch(getPedidoSuccess(response.data));
+        } else {
+          dispatch(getPedidoFailure("Error al obtener el pedido"));
+        }
+      })
+      .catch((error) => {
+        dispatch(getPedidoFailure("Error al obtener el pedido"));
+      });
+  };
 };
 
 //Thunk Post Pedido

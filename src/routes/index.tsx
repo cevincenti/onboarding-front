@@ -24,7 +24,7 @@ export default function AppRoutes() {
           <Route element={<Pedido />} path="pedido" />
         </Route>
         <Route element={<ProtectedRoute />}>
-          <Route element={<Buscador />} path="buscador" />
+          <Route element={<Buscador />} path="pedido/:id" />
         </Route>
         <Route index element={<Home />} />
       </Routes>

@@ -9,17 +9,20 @@ import { Provider } from "react-redux";
 
 import App from "./App";
 import { msalConfig } from "./authConfig";
+import ErrorBoundary from "components/ErrorBoundary";
 
 export const msalInstance = new PublicClientApplication(msalConfig);
 
 ReactDOM.render(
   <Provider store={store}>
-    <BrowserRouter>
-      <StyleSystemProvider>
-        <CssBaseline />
-        <App msalInstance={msalInstance} />
-      </StyleSystemProvider>
-    </BrowserRouter>
+    <ErrorBoundary>
+      <BrowserRouter>
+        <StyleSystemProvider>
+          <CssBaseline />
+          <App msalInstance={msalInstance} />
+        </StyleSystemProvider>
+      </BrowserRouter>
+    </ErrorBoundary>
   </Provider>,
   document.getElementById("root")
 );
